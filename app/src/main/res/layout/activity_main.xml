@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#34FDEA">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|fill_vertical"
+    android:background="#34FDEA"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/logscreen_img"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:gravity="fill_vertical"
+        android:background="#34EAEA"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/logscreen_email"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:hint="email"
+        android:paddingLeft="20dp"/>
+
+    <EditText
+        android:id="@+id/logscreen_passwd"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_width="match_parent"
+        android:hint="password"
+        android:layout_marginBottom="11dp"
+        android:paddingLeft="20dp"/>
+
+    <Button
+        android:id="@+id/logsc_logbuttn"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/logsc_regbuttn"
+        android:onClick="onREGbutclick"
+        android:layout_height="wrap_content"
+        android:text="REGISTER"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/logsc_clrtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#1834FC"
+        android:text="Clear"
+        android:onClick="cleardata"/>
+
+</LinearLayout>
+
+</ScrollView>
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#10EAFD">
+
+
+<LinearLayout
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#00BAFF"
+    android:gravity="top|center"
+    android:id="@+id/profilename">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_mobile"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"/>
+    <TextView
+        android:id="@+id/general"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"/>
+
+</LinearLayout>
+
+</ScrollView>

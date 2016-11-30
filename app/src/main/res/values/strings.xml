@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Userprofile</string>
+    <string name="aoi">aoi</string>
+    <string-array name="aoi">
+        <item>  </item>
+        <item> Ecommerce </item>
+        <item> IT </item>
+        <item> Telecom </item>
+    </string-array>
+</resources>
