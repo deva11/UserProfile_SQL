@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.app.*;
 import android.os.*;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.*;
 import android.content.*;
 
@@ -50,6 +52,14 @@ public class loggedin extends AppCompatActivity {
 
             mydb = new SQLDBhelper(this);
 
+            loggedview_email.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Intent others   =   new Intent(loggedin.this,Otherusers.class);
+                    startActivity(others);
+                    return false;
+                }
+            });
 
             /*Cursor result = mydb.Retrieveall(em);
 

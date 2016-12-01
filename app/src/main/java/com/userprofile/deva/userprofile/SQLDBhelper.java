@@ -81,6 +81,13 @@ public class SQLDBhelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public Cursor RetrieveEidandName()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("SELECT NAME,EMAILID FROM "+TABLE_NAME,null);
+        return result;
+    }
+
     public  Cursor particularuser(String email,String password)
     {
         SQLiteDatabase db = this.getReadableDatabase();
