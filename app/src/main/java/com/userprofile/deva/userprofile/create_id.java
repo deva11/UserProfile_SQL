@@ -2,6 +2,7 @@ package com.userprofile.deva.userprofile;
 
 
 import android.app.AlertDialog;
+import android.database.Cursor;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.*;
 
@@ -93,7 +94,15 @@ public class create_id extends AppCompatActivity {
                     if(!Emailvalidate(xemail))
                     {ET_EID.setError("Enter a valid Email ID"); }
 
-            }}
+            }
+                else
+                {
+                    CheckEmailIfExists(ET_EID.getText().toString());//////////////////////////////////////////////////////////////////////////////////
+                }
+
+
+
+            }
         });
 
 
@@ -107,7 +116,9 @@ public class create_id extends AppCompatActivity {
                         ET_PW.setError("Enter a valid password");
                     }
 
+
                 }
+
             }
         });
 
@@ -135,7 +146,11 @@ public class create_id extends AppCompatActivity {
 
 
         showcalender();
+
     }
+
+
+
 
     public void showcalender() {
         dob_tv = (TextView) findViewById(R.id.tv_reg_dob);
@@ -245,6 +260,22 @@ public class create_id extends AppCompatActivity {
                     ET_EID.setError("Invalid Mail");break;
 
                 }
+
+                if(CheckEmailIfExists(ET_EID.getText().toString()))
+                {
+                    AlertDialog.Builder emailexistdialog = new AlertDialog.Builder(this);
+                    emailexistdialog.setTitle("Error");
+                    emailexistdialog.setMessage("The Email ID already exists.\n Use another.");
+                    emailexistdialog.setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                    break;
+
+
+                }
                 else if(!Mobilevalidate(ET_MOB.getText().toString()))
                 {
                     ET_MOB.setError("Enter a valid mobile number");break;
@@ -298,12 +329,19 @@ public class create_id extends AppCompatActivity {
                         }
 
                     });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
-                    }).show();
+                    });
+                    builder.setNeutralButton("EDIT", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
                 }
 
 
@@ -391,6 +429,16 @@ public class create_id extends AppCompatActivity {
         if(password.matches(passpattern)){ return true; }  else {return false; }
     }
 
+    public boolean CheckEmailIfExists(String emailid)
+    {
+        mydb  = new SQLDBhelper(this);
+        Cursor emailcheck = mydb.Emaichecker(emailid);
+        if(emailcheck.getCount() > 0) { return true; }  else {return false; }
+
+
+
+    }
+
 
     public String XYZ()
     {
@@ -419,6 +467,8 @@ public class create_id extends AppCompatActivity {
             //}
         }
         return checkedString;
+
+
     }
 
 

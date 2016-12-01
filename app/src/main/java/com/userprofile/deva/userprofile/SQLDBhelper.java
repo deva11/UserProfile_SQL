@@ -90,6 +90,13 @@ public class SQLDBhelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor Emaichecker(String email)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor emailres = db.rawQuery(("SELECT * FROM "+ TABLE_NAME+ " WHERE "+COL3+  " = '" +email+ "';"),null);
+        return  emailres;
+    }
+
 
 
 
