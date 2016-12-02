@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.activity_main);
 
+            
+
 
 
             but_log = (Button)findViewById(R.id.logsc_logbuttn);

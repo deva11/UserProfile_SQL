@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import java.util.jar.Attributes;
@@ -74,6 +75,35 @@ public class SQLDBhelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean EDITdata(String name,String EMailID,String password,String mobile,String address,String spindata,String dob)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues coval = new ContentValues();
+        coval.put(COL2,name);
+        //coval.put(COL3,email);
+        coval.put(COL4,password);
+        coval.put(COL5,mobile);
+        coval.put(COL6,address);
+        coval.put(COL7,spindata);
+        coval.put(COL8,dob);
+
+        long x = db.update(TABLE_NAME,coval,COL3+" = '" +EMailID+"'" , null);
+
+
+        return true;
+
+        /*Long data = db.insert(TABLE_NAME,null,coval);
+
+
+        if(data == -1)
+            return false;
+        else
+            return true;  */
+
+
+
+    }
+
     public Cursor Retrieveall()
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -95,6 +125,13 @@ public class SQLDBhelper extends SQLiteOpenHelper {
         Log.e("DBCALL_",""+res);
         return  res;
 
+    }
+
+    public Cursor RetrieveDataForEdit(String email)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor data = db.rawQuery(("SELECT * FROM "+ TABLE_NAME + " WHERE "+COL3+ "= '"+email+"';"),null);
+        return data;
     }
 
     public Cursor Emaichecker(String email)

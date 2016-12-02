@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.app.*;
 import android.os.*;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
@@ -44,6 +47,9 @@ public class loggedin extends AppCompatActivity {
 
 
 
+
+
+
            // loggedview_name = (TextView)findViewById(R.id.profile_name);
             loggedview_email = (TextView)findViewById(R.id.profile_email);
            // loggedview_mobilenumber = (TextView)findViewById(R.id.profile_mobile);
@@ -51,6 +57,8 @@ public class loggedin extends AppCompatActivity {
             //general = (TextView)findViewById(R.id.general);
 
             mydb = new SQLDBhelper(this);
+
+
 
             loggedview_email.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -101,6 +109,34 @@ public class loggedin extends AppCompatActivity {
 */
             Showdata(emailId,password);
         }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO: Implement this method
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logged_in_option, menu);
+        return super.onCreateOptionsMenu(menu);
+
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.edit_option :
+                Intent intent = new Intent(this, EditProfile.class);
+                intent.putExtra("email",emailId);
+
+                startActivity(intent);
+                break;
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void Showdata(String email,String password) {
         mydb = new SQLDBhelper(this);

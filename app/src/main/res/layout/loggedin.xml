@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/profile_name"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
+        android:text="''"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_marginBottom="20dp"/>
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/profile_email"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
+        android:text="''"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_marginBottom="20dp"/>
@@ -42,15 +42,16 @@
     <TextView
         android:id="@+id/profile_mobile"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
+        android:text="''"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"/>
     <TextView
         android:id="@+id/general"
         android:layout_height="wrap_content"
-        android:text="Data"
+        android:text="''"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"/>
+
 
 </LinearLayout>
 

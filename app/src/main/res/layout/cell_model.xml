@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
         android:text="..................."
