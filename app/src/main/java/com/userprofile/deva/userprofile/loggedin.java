@@ -71,6 +71,10 @@ public class loggedin extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     Intent others   =   new Intent(loggedin.this,Otherusers.class);
+
+                    others.putExtra("curruseremail",emailId);
+
+
                     startActivity(others);
                     return false;
                 }
@@ -116,6 +120,8 @@ public class loggedin extends AppCompatActivity {
 */
             Showdata(emailId,password);
         }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

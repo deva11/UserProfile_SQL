@@ -20,6 +20,9 @@ import java.util.List;
 
 public class Otherusers extends AppCompatActivity {
 
+    String curruseremailID = "";
+
+
 
     SharedPreferences Sp;
 
@@ -141,6 +144,7 @@ public class Otherusers extends AppCompatActivity {
         {
             Sp = getApplicationContext().getSharedPreferences("PERSData",MODE_PRIVATE);
             String delemail = Sp.getString("OtheruserEmail",null);
+
             DeleteOtherUser(delemail);
             userlist.remove(selectedPosition);
             othersListAdapter.notifyDataSetChanged();
@@ -172,13 +176,24 @@ public class Otherusers extends AppCompatActivity {
         {
             if(data.moveToFirst()) {
 
+
+
                 do {
+                    Intent resultInetent    =   getIntent();
+                    curruseremailID =   resultInetent.getStringExtra("curruseremail");
                     String name = data.getString(0);
                     String email = data.getString(1);
-                    Model_class modelClass = new Model_class();
-                    modelClass.SetName(name);
-                    modelClass.SetEmailid(email);
-                    userlist.add(modelClass);
+                    if(email.equals(curruseremailID) ) break;
+
+
+
+
+
+                        Model_class modelClass = new Model_class();
+                        modelClass.SetName(name);
+                        modelClass.SetEmailid(email);
+                        userlist.add(modelClass);
+
 
                 } while (data.moveToNext());
             }
