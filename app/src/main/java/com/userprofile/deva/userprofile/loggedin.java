@@ -24,6 +24,9 @@ public class loggedin extends AppCompatActivity {
         //TextView loggedview_mobilenumber;
 
     //TextView general;
+    public static final String PERSData = "Personaldata";
+
+
 
 
 
@@ -57,6 +60,10 @@ public class loggedin extends AppCompatActivity {
             //general = (TextView)findViewById(R.id.general);
 
             mydb = new SQLDBhelper(this);
+
+
+
+
 
 
 

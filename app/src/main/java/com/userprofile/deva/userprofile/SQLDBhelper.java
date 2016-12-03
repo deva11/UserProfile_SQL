@@ -99,8 +99,12 @@ public class SQLDBhelper extends SQLiteOpenHelper {
             return false;
         else
             return true;  */
+    }
 
-
+    public void Delete(String email)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+         db.delete(TABLE_NAME , COL3 +"=?", new String[] {email});
 
     }
 

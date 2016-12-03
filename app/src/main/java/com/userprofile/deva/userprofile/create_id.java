@@ -214,26 +214,6 @@ public class create_id extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.tick_done:
 
-
-
-
-
-
-
-
-                /*while (ET_FN.getText().toString().isEmpty() || ET_LN.getText().toString().isEmpty() || ET_ADDRT.getText().toString().isEmpty() || ET_PW.getText().toString().isEmpty() || ET_MOB.getText().toString().isEmpty() || spindata == "" || dob_tv.getText().toString().isEmpty()) {
-                    final AlertDialog.Builder popup = new  AlertDialog.Builder(this);
-                    popup.setTitle("Field is Missing");                       // Can be Deleted from here
-                    popup.setMessage("Please fill all(*) fields");
-                    popup.setNeutralButton("Okay",new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-
-
-                }*/
                 if ((ET_FN.getText().toString().isEmpty()) ||
                         (ET_LN.getText().toString().isEmpty()) ||
                         (ET_EID.getText().toString().isEmpty()) ||

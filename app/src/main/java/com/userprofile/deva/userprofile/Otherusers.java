@@ -1,12 +1,16 @@
 package com.userprofile.deva.userprofile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,6 +20,10 @@ import java.util.List;
 
 public class Otherusers extends AppCompatActivity {
 
+
+    SharedPreferences Sp;
+
+    int selectedPosition    =   0;
     ArrayList<Model_class> userlist;
     ListView listView;
 
@@ -36,6 +44,11 @@ public class Otherusers extends AppCompatActivity {
         Showotherusers();
 
 
+
+
+
+
+
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -49,16 +62,29 @@ public class Otherusers extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Model_class currentUser = userlist.get(position);
 
-                String xmail = currentUser.GetEmailid();
+
+
+
+                registerForContextMenu(listView);
+
+
+                Model_class currentUser = userlist.get(position);
+                selectedPosition    =   position;
+                String xemail = currentUser.GetEmailid();
                 String name = currentUser.GetName();
+
+                Sp = getApplicationContext().getSharedPreferences("PERSData",MODE_PRIVATE); // Saving email ID of selected user
+                SharedPreferences.Editor ediitemail = Sp.edit();
+
+                ediitemail.putString("OtheruserEmail",xemail);
+                ediitemail.commit();
 
 
 
                 //currentUser.GetName()
 
-                AlertDialog.Builder listdialog = new AlertDialog.Builder(Otherusers.this);
+               /* AlertDialog.Builder listdialog = new AlertDialog.Builder(Otherusers.this);
                 listdialog.setTitle("Select");
                 listdialog.setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
                     @Override
@@ -76,7 +102,7 @@ public class Otherusers extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                }).show();
+                }).show(); */
 
 
                 return false;
@@ -85,10 +111,61 @@ public class Otherusers extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        menu.add("Edit");
+        menu.add("Delete");
+
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+         super.onContextItemSelected(item);
+
+
+        if(item.getTitle() == "Edit")
+        {
+
+            Intent IntentToEdit = new Intent(Otherusers.this,EditProfile.class);
+
+            startActivity(IntentToEdit);
+
+        }
+
+        if(item.getTitle() == "Delete")
+        {
+            Sp = getApplicationContext().getSharedPreferences("PERSData",MODE_PRIVATE);
+            String delemail = Sp.getString("OtheruserEmail",null);
+            DeleteOtherUser(delemail);
+            userlist.remove(selectedPosition);
+            othersListAdapter.notifyDataSetChanged();
+            //Showotherusers();
+
+        }
+        //finish();
+        //startActivity(getIntent());
+
+
+
+            return  true;
+    }
+
+    public void DeleteOtherUser(String emaildelete)
+    {
+        mySQdb = new SQLDBhelper(this);
+        mySQdb.Delete(emaildelete);
+    }
+
     public void Showotherusers()
     {
         mySQdb = new SQLDBhelper(this);
-
+       // userlist.clear();
+       // userlist    =   new ArrayList<>();
         Cursor data = mySQdb.RetrieveEidandName();
 
         if(data.getCount() > 0)

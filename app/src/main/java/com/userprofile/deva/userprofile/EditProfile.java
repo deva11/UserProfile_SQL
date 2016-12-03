@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -24,6 +27,13 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class EditProfile extends AppCompatActivity {
+
+
+
+
+    String OtheruseremailID ="";
+
+
 
     String TAG = "CREATE_ID_ACT";
     SQLDBhelper mydb; //SQLite define
@@ -61,6 +71,12 @@ public class EditProfile extends AppCompatActivity {
 
         Intent retrieveintent = getIntent();
         emailId =  retrieveintent.getStringExtra("email");
+
+
+        SharedPreferences Sp = getApplicationContext().getSharedPreferences("PERSData",MODE_PRIVATE);
+        OtheruseremailID = Sp.getString("OtheruserEmail",null);
+
+
 
 
 
@@ -151,6 +167,45 @@ public class EditProfile extends AppCompatActivity {
 
         showcalender();
         ImportData(emailId);
+        ImportOtheruserData(OtheruseremailID);
+
+    }
+
+    public void ImportOtheruserData(String email)
+    {
+        mydb = new SQLDBhelper(this);
+
+        Cursor retdata = mydb.RetrieveDataForEdit(email);
+        if(retdata.getCount() > 0)
+        {
+            if(retdata.moveToFirst())
+            {
+                do {
+                    //StringBuffer buffer = new StringBuffer();
+
+                    String xname = retdata.getString(1);
+                    String[] name = xname.split("\\s");
+
+                    edt_FN.setText(name[0]);
+                    edt_LN.setText(name[1]);
+
+                    edt_PW.setText(retdata.getString(3));
+
+                    edt_MOB.setText(retdata.getString(4));
+
+                    edt_ADDRT.setText(retdata.getString(5));
+
+
+
+                    edt_dob_tv.setText(retdata.getString(7));
+
+
+
+
+
+                }while (retdata.moveToNext());
+            }
+        }
 
     }
 
@@ -164,19 +219,13 @@ public class EditProfile extends AppCompatActivity {
             if(retdata.moveToFirst())
             {
                 do {
-                    StringBuffer buffer = new StringBuffer();
+                    //StringBuffer buffer = new StringBuffer();
 
                     String xname = retdata.getString(1);
                     String[] name = xname.split("\\s");
 
                         edt_FN.setText(name[0]);
                         edt_LN.setText(name[1]);
-
-
-
-                           // edt_FN.setText(retdata.getString(1));
-
-                            //edt_LN.setText(retdata.getString(1));
 
                             edt_PW.setText(retdata.getString(3));
 
@@ -328,14 +377,41 @@ public class EditProfile extends AppCompatActivity {
                     builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            //String xy = OtheruseremailID = emailId;
 
-                            boolean saved = mydb.EDITdata(edt_FN.getText().toString() + " " + edt_LN.getText().toString(),emailId, edt_PW.getText().toString(), edt_MOB.getText().toString(), edt_ADDRT.getText().toString(), spindata, edt_dob_tv.getText().toString());
+                            boolean saved = mydb.EDITdata(edt_FN.getText().toString() + " " + edt_LN.getText().toString(),emailId , edt_PW.getText().toString(), edt_MOB.getText().toString(), edt_ADDRT.getText().toString(), spindata, edt_dob_tv.getText().toString());
+                            boolean Esaved = mydb.EDITdata(edt_FN.getText().toString() + " " + edt_LN.getText().toString(),OtheruseremailID , edt_PW.getText().toString(), edt_MOB.getText().toString(), edt_ADDRT.getText().toString(), spindata, edt_dob_tv.getText().toString());
+
                             if (saved == true) {
                                 String x = edt_FN.getText().toString();
                                 final AlertDialog.Builder successdialog = new AlertDialog.Builder(EditProfile.this);
                                 successdialog.setTitle("Success!");
 
-                                successdialog.setMessage("ID created " + x + "!.Login now");
+                                successdialog.setMessage("Details Updated " + x + "!.Login now");
+                                successdialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(EditProfile.this, "Details Updated.", Toast.LENGTH_SHORT).show();
+                                        finish();
+
+
+
+                                    }
+                                }).show();
+
+
+
+
+
+
+                            }
+                            if (Esaved == true)
+                            {
+                                String x = edt_FN.getText().toString();
+                                final AlertDialog.Builder successdialog = new AlertDialog.Builder(EditProfile.this);
+                                successdialog.setTitle("Success!");
+
+                                successdialog.setMessage("Details Updated " + x + "!.Login now");
                                 successdialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -344,8 +420,11 @@ public class EditProfile extends AppCompatActivity {
                                     }
                                 }).show();
 
+                            }
 
-                            } else
+
+
+                            else
                                 Toast.makeText(EditProfile.this, "Error in saving data", Toast.LENGTH_SHORT).show();
 
                         }
