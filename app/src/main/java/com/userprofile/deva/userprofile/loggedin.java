@@ -145,6 +145,36 @@ public class loggedin extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
+            case R.id.edit_Delete :
+
+                mydb = new SQLDBhelper(this);
+                AlertDialog.Builder buider = new AlertDialog.Builder(this);
+                buider.setTitle("Delete My ID");
+                buider.setMessage("Are You sure ?");
+                buider.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mydb.Delete(emailId);
+
+                        Toast.makeText(loggedin.this,"ID Deleted",Toast.LENGTH_SHORT);
+                        finish();
+
+
+                    }
+                });
+                buider.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                }).show();
+
+                break;
+            case R.id.edit_Exit :
+
+                finish();
+
 
 
         }
