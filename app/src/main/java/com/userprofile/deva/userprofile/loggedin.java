@@ -26,10 +26,6 @@ public class loggedin extends AppCompatActivity {
     //TextView general;
     public static final String PERSData = "Personaldata";
 
-
-
-
-
         SQLDBhelper mydb;
     String emailId,password;
 
