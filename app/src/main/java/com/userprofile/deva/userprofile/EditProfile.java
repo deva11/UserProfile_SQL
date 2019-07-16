@@ -67,12 +67,8 @@ public class EditProfile extends AppCompatActivity {
         // TODO: Implement this method
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editprofile);
-
-
         Intent retrieveintent = getIntent();
         emailId =  retrieveintent.getStringExtra("email");
-
-
         SharedPreferences Sp = getApplicationContext().getSharedPreferences("PERSData",MODE_PRIVATE);
         OtheruseremailID = Sp.getString("OtheruserEmail",null);
 
@@ -87,7 +83,6 @@ public class EditProfile extends AppCompatActivity {
         edt_FN = (EditText) findViewById(R.id.edt_reg_firstname);
         edt_LN = (EditText) findViewById(R.id.edt_reg_lastname);
         edt_MOB = (EditText) findViewById(R.id.edt_reg_phone);
-        //edt_EID = (EditText) findViewById(R.id.edt_reg_email);
         edt_PW = (EditText) findViewById(R.id.edt_reg_passwd);
         edt_ADDRT = (EditText) findViewById(R.id.edt_reg_addr);
         edt_dob_tv = (TextView) findViewById(R.id.edt_tv_reg_dob);
